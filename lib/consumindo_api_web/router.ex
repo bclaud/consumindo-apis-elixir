@@ -18,6 +18,7 @@ defmodule ConsumindoApiWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/api/v1/repo/:username", RepoController, :show
   end
 
   # Other scopes may use custom stacks.
