@@ -3,7 +3,7 @@ defmodule ConsumindoApiWeb.RepoController do
   alias ConsumindoApi.Github
 
   def show(conn, %{"username" => username}) do
-    case Github.get_user_repo(username) do
+    case Github.get_user_repos(username) do
       {:ok, repos_info} ->
         conn
         |> put_status(:ok)
