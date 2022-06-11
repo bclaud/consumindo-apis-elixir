@@ -6,7 +6,7 @@ defmodule ConsumindoApiWeb.Router do
     plug :fetch_session
     plug :fetch_live_flash
     plug :put_root_layout, {ConsumindoApiWeb.LayoutView, :root}
-    plug :protect_from_forgery
+    # plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
 
@@ -19,6 +19,8 @@ defmodule ConsumindoApiWeb.Router do
 
     get "/", PageController, :index
     get "/api/v1/repo/:username", RepoController, :show
+
+    post "/api/v1/user/create/", UserController, :create
   end
 
   # Other scopes may use custom stacks.
