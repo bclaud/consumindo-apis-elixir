@@ -31,9 +31,35 @@ defmodule ConsumindoApi.GithubTest do
         Plug.Conn.resp(conn, 200, body)
       end)
 
-      response = ConsumindoApi.Github.get_user_repos(url, "valid_user")
+      response = ConsumindoApi.Github.get_user_repos(url, username)
 
       assert response == {:ok, body}
+    end
+
+    test "handle not found response", %{bypass: bypass} do
+      url = endpoint_url(bypass.port)
+      invalid_user = "invalid_user"
+
+      Bypass.expect(bypass, "GET", "/users/#{invalid_user}/repos", fn conn ->
+        Plug.Conn.resp(conn, 404, "User not found")
+      end)
+
+      response = ConsumindoApi.Github.get_user_repos(url, invalid_user)
+
+      assert response == {:error, "User not found"}
+    end
+
+    test "can handle internal server error from API", %{bypass: bypass} do
+      url = endpoint_url(bypass.port)
+      username = "any_user"
+
+      Bypass.expect(bypass, "GET", "/users/#{username}/repos", fn conn ->
+        Plug.Conn.resp(conn, 500, "User not found")
+      end)
+
+      response = ConsumindoApi.Github.get_user_repos(url, username)
+
+      assert response == {:error, "Unexpected response from API"}
     end
 
     defp endpoint_url(port), do: "http://localhost:#{port}"

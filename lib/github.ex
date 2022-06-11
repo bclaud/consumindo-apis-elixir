@@ -18,7 +18,8 @@ defmodule ConsumindoApi.Github do
     case get(url <> "/users/" <> username <> "/repos") do
       {:error, reason} -> {:error, reason}
       {:ok, %{status: 200, body: body}} -> {:ok, body}
-      {:ok, body} -> {:ok, body}
+      {:ok, %{status: 404}} -> {:error, "User not found"}
+      {:ok, %{status: 500}} -> {:error, "Unexpected response from API"}
     end
   end
 end
