@@ -12,5 +12,5 @@ defmodule ConsumindoApi.Users.Create do
     {:ok, id}
   end
 
-  defp handle_insert({:error, reason}), do: {:error, reason}
+  defp handle_insert({:error, _reason}), do: {:error, "invalid params"}
 end

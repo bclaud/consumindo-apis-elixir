@@ -53,7 +53,8 @@ defmodule ConsumindoApi.MixProject do
       {:hackney, "~> 1.17"},
       {:bypass, "~> 2.1", only: :test},
       {:bcrypt_elixir, "~> 3.0"},
-      {:guardian, "~> 2.0"}
+      {:guardian, "~> 2.0"},
+      {:guardian_phoenix, "~> 2.0"}
     ]
   end
 
