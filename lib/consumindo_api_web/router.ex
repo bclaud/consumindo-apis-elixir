@@ -21,6 +21,7 @@ defmodule ConsumindoApiWeb.Router do
     get "/api/v1/repo/:username", RepoController, :show
 
     post "/api/v1/user/create/", UserController, :create
+    post "/api/v1/user/login", UserController, :login
   end
 
   # Other scopes may use custom stacks.

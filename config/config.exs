@@ -7,6 +7,12 @@
 # General application configuration
 import Config
 
+# Configures Guardian for JWT generation
+
+config :consumindo_api, ConsumindoApiWeb.Auth.Guardian,
+  issuer: "Consumindo API",
+  secret_key: "/tEbnvOMLIcwaq0w6mP2F/fzUS3T1Ra3cAcD69UyIHfWb5xUR9Ht02RpwO7A9fZ2"
+
 config :consumindo_api,
   ecto_repos: [ConsumindoApi.Repo],
   generators: [binary_id: true]
